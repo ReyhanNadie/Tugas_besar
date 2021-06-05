@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<?php
+session_start()
+
+?>
 <html>
 
 <head>
@@ -15,7 +19,7 @@
 	<header>
 		<nav class="navbar">
 			<div class="menu">
-				<a class="active" href="index.html">Home</a>
+				<a class="active" href="index.php">Home</a>
 				<a href="#" onclick="myFunction()" class="dropbtn">Filter</a>
 				<div class="dropdown">
 					<!-- <button onclick="myFunction()" class="dropbtn">Dropdown</button> -->
@@ -27,6 +31,9 @@
 						<a href="#" id="campur">Campur</a>
 					</div>
 				</div>
+				<?=isset($_SESSION["Data_login"])?"<a href='#'>Selamat Datang ".$_SESSION["Data_login"]."</a>":""?>
+				<a href="login.php?logout=true"> Logout
+				</a>
 			</div>
 		</nav>
 	</header>
@@ -139,9 +146,7 @@
 					return (a[1] > b[1]) ? -1 : 1;
 				}
 			}
-			// ------------------
-
-			// Validasi Harga Sesuai Paket
+		
 			function rubahRp(angka) {
 				var reverse = angka.toString().split('').reverse().join(''),
 					ribuan = reverse.match(/\d{1,3}/g);
@@ -149,12 +154,10 @@
 				ribuan = ribuan;
 				return ribuan;
 			}
-			// ---------------
 			var no = 1;
 			var fill = "";
 			console.log(sortData);
-			// console.log(nm_kos[0][3]);
-			for (var z = 0; z < nm_kos.length; z++) {
+						for (var z = 0; z < nm_kos.length; z++) {
 				if (sortData == "all") {
 					if (nm_kos[z][1] == "-") {
 						fill +=
